@@ -25,7 +25,7 @@ import static android.provider.Telephony.Mms.Part.FILENAME;
 public class Data {
     private static  Data ourInstance;
 
-    private ArrayList<Subscription> subscriptions;
+    private static ArrayList<Subscription> subscriptions;
 
     public static Data getInstance() {
         return ourInstance;
@@ -51,23 +51,23 @@ public class Data {
     }
   */
 
- public static void loadFromFile(Context context) {
+     public static void loadFromFile(Context context) {
 
-     try {
-         FileInputStream fis = context.openFileInput(FILENAME);
-         BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+         try {
+             FileInputStream fis = context.openFileInput(FILENAME);
+             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
-         Gson gson = new Gson();
-         ourInstance = gson.fromJson(in, Data.class);
+             Gson gson = new Gson();
+             ourInstance = gson.fromJson(in, Data.class);
 
 
 
-     } catch (FileNotFoundException e) {
-         ourInstance = new Data();
+         } catch (FileNotFoundException e) {
+             ourInstance = new Data();
+
+         }
 
      }
-
- }
 
     public static void saveInFile(Context context) {
         try {
@@ -85,5 +85,16 @@ public class Data {
         } catch (IOException e) {
             throw new RuntimeException();
         }
+    }
+
+    public static double MoneyCalculator(){
+        double Money = 0.0;
+
+
+        for (Subscription sub : subscriptions){
+            Money = Money + sub.getCharge();
+        }
+
+        return Money;
     }
 }
