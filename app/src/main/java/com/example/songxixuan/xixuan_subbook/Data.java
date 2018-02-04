@@ -25,7 +25,7 @@ import static android.provider.Telephony.Mms.Part.FILENAME;
 public class Data {
     private static  Data ourInstance;
 
-    private static ArrayList<Subscription> subscriptions;
+    private ArrayList<Subscription> subscriptions;
 
     public static Data getInstance() {
         return ourInstance;
@@ -43,13 +43,6 @@ public class Data {
 
 
 
- /**
-
-    public static void saveInFile(Context context){
-        Gson gson = new Gson();
-        gson.toJson(ourInstance);
-    }
-  */
 
      public static void loadFromFile(Context context) {
 
@@ -87,14 +80,5 @@ public class Data {
         }
     }
 
-    public static double MoneyCalculator(){
-        double Money = 0.0;
 
-
-        for (Subscription sub : subscriptions){
-            Money = Money + sub.getCharge();
-        }
-
-        return Money;
-    }
 }

@@ -14,6 +14,17 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<Subscription> arrayAdapter;
 
+    public double MoneyCalculator(){
+        double Money = 0.0;
+
+
+        for (Subscription sub : Data.getInstance().getSubscriptions()){
+            Money = Money + sub.getCharge();
+        }
+
+        return Money;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
         listView.setAdapter(arrayAdapter);
         TextView display = findViewById(R.id.MoneyOutput);
-        //double money = Data.MoneyCalculator();
-        display.setText(String.valueOf(Data.MoneyCalculator()));
+        display.setText(String.valueOf(MoneyCalculator()));
 
     }
 
