@@ -23,7 +23,7 @@ import static android.provider.Telephony.Mms.Part.FILENAME;
  */
 
 public class Data {
-    private static final Data ourInstance = new Data();
+    private static  Data ourInstance;
 
     private ArrayList<Subscription> subscriptions;
 
@@ -34,7 +34,7 @@ public class Data {
 
 
     private Data() {
-        subscriptions = new ArrayList<Subscription>();
+        subscriptions = new ArrayList<>();
     }
 
     public ArrayList<Subscription> getSubscriptions() {
@@ -58,17 +58,13 @@ public class Data {
          BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
          Gson gson = new Gson();
-
-         Type listType = new TypeToken<ArrayList<Subscription>>(){}.getType();
-         subscriptions = gson.fromJson(in, listType);
+         ourInstance = gson.fromJson(in, Data.class);
 
 
 
      } catch (FileNotFoundException e) {
-         subscriptions = new ArrayList<Subscription>();
+         ourInstance = new Data();
 
-     } catch (IOException e) {
-         throw new RuntimeException();
      }
 
  }

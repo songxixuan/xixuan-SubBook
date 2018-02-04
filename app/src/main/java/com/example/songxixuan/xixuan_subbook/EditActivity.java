@@ -21,6 +21,7 @@ public class EditActivity extends AppCompatActivity {
     private EditText date;
     private EditText charge;
     private EditText comment;
+    private  int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,11 @@ public class EditActivity extends AppCompatActivity {
         comment = findViewById(R.id.CommentInput);
         final Activity that = this;
 
-
         if (usage.equals("add")){
             subscription = new Subscription();
+            findViewById(R.id.delete_btn).setVisibility(View.GONE);
         } else if (usage.equals("edit")) {
-            int index = intent.getIntExtra("index",-1);
+            index = intent.getIntExtra("index",-1);
             subscription = Data.getInstance().getSubscriptions().get(index);
         }
 
@@ -93,6 +94,13 @@ public class EditActivity extends AppCompatActivity {
         if (usage.equals("add")){
             Data.getInstance().getSubscriptions().add(subscription);
         }
+        Data.saveInFile(this);
+        finish();
+    }
+
+    public void onDeleteClicked(View view) {
+
+        Data.getInstance().getSubscriptions().remove(index);
         Data.saveInFile(this);
         finish();
     }
