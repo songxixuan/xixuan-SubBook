@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Data.loadFromFile(this);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.list_view);
         arrayAdapter = new ArrayAdapter<>(this,R.layout.list_item,Data.getInstance().getSubscriptions());
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //Data.loadFromFile(this);
         listView.setAdapter(arrayAdapter);
     }
 

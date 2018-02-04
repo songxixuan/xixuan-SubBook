@@ -75,12 +75,12 @@ public class EditActivity extends AppCompatActivity {
 
     public void onConfirmClicked(View view){
         if (name.getText().toString().trim().isEmpty()){
-            Toast.makeText(this,"Name cannot be empty",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Name cannot be empty",Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (charge.getText().toString().trim().isEmpty()){
-            Toast.makeText(this,"Charge cannot be empty",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Charge cannot be empty",Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -93,7 +93,7 @@ public class EditActivity extends AppCompatActivity {
         if (usage.equals("add")){
             Data.getInstance().getSubscriptions().add(subscription);
         }
-        Data.SaveInFile(this);
+        Data.saveInFile(this);
         finish();
     }
 }
