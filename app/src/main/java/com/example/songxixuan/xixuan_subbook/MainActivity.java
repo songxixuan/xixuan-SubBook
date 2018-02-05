@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * MainActivity is use to control main layout of app
+ */
+
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<Subscription> arrayAdapter;
