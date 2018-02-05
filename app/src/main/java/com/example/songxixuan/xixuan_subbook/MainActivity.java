@@ -13,7 +13,10 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter<Subscription> arrayAdapter;
-
+    /**
+     * MoneyCalculator is used to calculate total monthly charge of very subscription.
+     *
+     */
     public double MoneyCalculator(){
         double Money = 0.0;
 
@@ -35,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         final Activity that = this;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+
+            /**
+             * onItemClick will act after list of view being clicked. it will pass a key and value to edit page
+             * to let edit page know we are editing now
+             *  also it will give index of clicked subscription to edit page.
+             */
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(that,EditActivity.class);
                 intent.putExtra("usage","edit");
@@ -56,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
         display.setText(String.valueOf(MoneyCalculator()));
 
     }
-
+    /**
+     * onButtonAddClicked will act after adding button being clicked. it will pass a key and value to edit page
+     * to let edit page know we are adding new subscription now.
+     */
     public void onButtonAddClicked(View view){
         Intent intent = new Intent(this,EditActivity.class);
         intent.putExtra("usage","add");

@@ -22,6 +22,13 @@ import static android.provider.Telephony.Mms.Part.FILENAME;
  * Created by songxixuan on 2018/2/3.
  */
 
+
+/**
+ * Purpose: Class Data is used to access data of subscription array and pass data.
+ * Attributes: ourInstance: static value used to present current data
+ *             subscriptions: array of subscription list
+ */
+
 public class Data {
     private static  Data ourInstance;
 
@@ -42,8 +49,10 @@ public class Data {
     }
 
 
-
-
+    /**
+     * origin code got from CMPUT301 lab.
+     * Purpose: use gson to read data from file.
+     */
      public static void loadFromFile(Context context) {
 
          try {
@@ -62,6 +71,10 @@ public class Data {
 
      }
 
+    /**
+     * origin code got from CMPUT301 lab.
+     * Purpose: use gson to save data to file.
+     */
     public static void saveInFile(Context context) {
         try {
             FileOutputStream fos = context.openFileOutput(FILENAME,

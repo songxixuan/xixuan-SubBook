@@ -14,6 +14,12 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+/**
+ * Attributes: usage: I use this value as a key, to detect between add new subscription and edit.
+ *                      since i use the same layout to edit and add.
+ *             index: to get index of subscription in Subscription array.
+ */
+
 public class EditActivity extends AppCompatActivity {
     private String usage;
     private Subscription subscription;
@@ -27,6 +33,9 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        /**
+         * usage is a key, it contains value. after getting intent, it also gets usage.
+         */
         Intent intent = getIntent();
         usage = intent.getStringExtra("usage");
         name = findViewById(R.id.NameInput);
@@ -35,8 +44,20 @@ public class EditActivity extends AppCompatActivity {
         comment = findViewById(R.id.CommentInput);
         final Activity that = this;
 
+        /**
+         *after getting usage, usage contains value, if value is "add". it means now we need to do
+         * adding new subscription. if value is "edit" . it means now need to do editing or
+         *  deleting job
+         *
+         *
+         */
+
         if (usage.equals("add")){
             subscription = new Subscription();
+
+            /**
+             * if we are doing adding job, delete button shall be invisible.
+             */
             findViewById(R.id.delete_btn).setVisibility(View.GONE);
         } else if (usage.equals("edit")) {
             index = intent.getIntExtra("index",-1);
@@ -48,6 +69,13 @@ public class EditActivity extends AppCompatActivity {
         date.setText(subscription.getDateStr());
         charge.setText(Double.toString(subscription.getCharge()));
         comment.setText(subscription.getComment());
+
+
+        /**
+         * I use DatePickerDialog to get date input. DatePickerDialog can avoid incorrect date format
+         *
+         * Origin code from https://stackoverflow.com/questions/39916178/how-to-show-datepickerdialog-on-button-click
+         */
         date.setFocusable(false);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,10 +99,16 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
+    /**
+     * following codes are used to act when confirm button clicked.
+     */
+
     public void onConfirmClicked(View view){
+        /**
+         *  following codes are used to avoid empty input of name and charge
+         */
         if (name.getText().toString().trim().isEmpty()){
             Toast.makeText(this,"Name cannot be empty",Toast.LENGTH_SHORT).show();
             return;
@@ -91,12 +125,17 @@ public class EditActivity extends AppCompatActivity {
         subscription.setCharge(Double.parseDouble(charge.getText().toString()));
         subscription.setComment(comment.getText().toString());
 
+
         if (usage.equals("add")){
             Data.getInstance().getSubscriptions().add(subscription);
         }
         Data.saveInFile(this);
         finish();
     }
+
+    /**
+     * following codes are used to act when delete button clicked.
+     */
 
     public void onDeleteClicked(View view) {
 

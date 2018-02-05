@@ -9,6 +9,15 @@ import java.util.Date;
  * Created by songxixuan on 2018/2/3.
  */
 
+
+/**
+ * Purpose: Class Subscription contain information of array subscription.
+ * Attributes: name: subcription's name
+ *              date: starting date
+ *              charge: monthly charge
+ *              comment: comment of subscription
+ */
+
 public class Subscription {
     private String name;
     private Date date;
